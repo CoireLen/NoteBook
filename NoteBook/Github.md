@@ -12,10 +12,16 @@
 ### 添加文件
 使用命令 
 >git add <文件名>
+### 设置用户名
+>git config --global user.email "you@example.com"
+>git config --global user.name "Your Name"
 
 ### 提交更改
 使用命令
->git commit -m '一些描述'
+>git commit -m "一些描述"
 
 ### 设置上传地址
-git 
+>git remote add <Github库的链接>
+
+### 上传
+>git push
