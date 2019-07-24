@@ -9,3 +9,13 @@
 > git clone <Github库的链接>
 - 在网页上点击 Clone or Download 会显示
 
+### 添加文件
+使用命令 
+>git add <文件名>
+
+### 提交更改
+使用命令
+>git commit -m '一些描述'
+
+### 设置上传地址
+git 
