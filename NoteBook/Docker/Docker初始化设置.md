@@ -8,7 +8,7 @@
 重启
 
 ### 添加用户权限
-> sudo usermode -aG docker USER_NAME
+> sudo usermod -aG docker USER_NAME
 
 重新登陆
 ### Login 和Pull
