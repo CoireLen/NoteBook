@@ -1,0 +1,70 @@
+```python
+import numpy as np
+```
+创建数组
+
+- 使用array来建立ndarry
+```py
+a=np.array([])
+a=np.array(())
+a=np.array([[]])
+```
+支持数组，元组，多维数组
+- 使用shape获取数组的形状
+```py
+print(a.shape)
+```
+- 使用reshape改变数组形状
+```py
+b=a.reshape(3,3,3,3)
+```
+- 或者直接改变数组
+```py
+a.shape=3,3,3,3
+```
+- 使用-1来自动推断数组大小
+```py
+a.shape=3,-1
+b=a.reshape(3,-1)
+```
+<b> 需要注意的是数组总大小必须等于shape的乘积</b>
+- 使用dtype获得数据类型
+```py
+a.dtype
+```
+- 在array中使用dtype建立该类型数组
+```py
+array([],dtype=np.int32)
+```
+- 使用np.typeDict.values() 输出所有类型
+---
+---
+### 自动生成数组
+- 使用arange
+```py
+a=np.arange(开始值,结束值,步长)
+```
+数学表示: [开始值,结束值)
+
+------
+- 使用linspace建立等差数列
+```py
+a=np.linspace(开始值,结束值,元素个数)
+```
+数学表示: [开始值,结束值]
+
+----
+- 使用logspace建立等比数列
+```py
+a=np.logspace(开始值,结束值,元素个数)
+```
+开始值与结束值均自动计算 $基数^{开始值、结束值}$
+基数可以指定默认是10
+
+---
+---
+### 空数组的建立
+- 使用empty
+```py
+a=np.empty(数组大小,数组类型)
+```
