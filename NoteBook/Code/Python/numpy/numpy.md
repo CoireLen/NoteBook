@@ -27,7 +27,7 @@ a.shape=3,3,3,3
 a.shape=3,-1
 b=a.reshape(3,-1)
 ```
-<b> 需要注意的是数组总大小必须等于shape的乘积</b>
+*** 需要注意的是数组总大小必须等于shape的乘积 ***
 - 使用dtype获得数据类型
 ```py
 a.dtype
