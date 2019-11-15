@@ -22,7 +22,7 @@
 
 获取现有镜像信息
 ### commit 
-> docker commit -m "消息" -a "作者" id name:ver
+> docker commit -m "消息" -a "作者" id username/imgname:ver
 
 ### 映射文件夹
 > docker run -it --mount type=bind,source=D:/Code, destination=/code/ gcc bash
