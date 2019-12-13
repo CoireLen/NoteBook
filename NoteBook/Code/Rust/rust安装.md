@@ -13,7 +13,7 @@
     #
     #Rust
     # 
-    PATH = $PATH:$HOME/.cargo/env
+    PATH = $PATH:$HOME/.cargo/bin
     export PATH
 ```
 
