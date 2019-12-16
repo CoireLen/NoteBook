@@ -12,29 +12,75 @@ void getnumlist(int a,list<char> &lc)
 {
     while (a)
     {
-        lc.push_front(a%10);
+        lc.push_front(a%10+'0');
         a/=10;
     }
-    
 }
-void addcom(list<char> lc,int n)
+int complit(list<char> &lc)
 {
-    if (n)
+    for(auto i=lc.begin();i!=lc.end();i++)//&
     {
-        auto lc1=lc;
-        
+        if(*i=='&')
+        {
+            lc.erase(i);
+            i=lc.begin();
+        }
+    }
+    return 0;
+}
+void addcom(list<char> &lc,int num,int now)
+{
+    if (now<num-1)
+    {
+        auto lc1(lc);
+        auto 
+        i=lc1.begin();
+        for(int o=0;o<2*now+1;o++)i++;
+        lc1.insert(i,'+');
+        auto lc2(lc);
+        i=lc2.begin();
+        for(int o=0;o<2*now+1;o++)i++;
+        lc2.insert(i,'-');
+        auto lc3=lc;
+        i=lc3.begin();
+        for(int o=0;o<2*now+1;o++)i++;
+        lc3.insert(i,'*');
+        auto lc4=lc;
+        i=lc4.begin();
+        for(int o=0;o<2*now+1;o++)i++;
+        lc4.insert(i,'/');
+        auto lc5=lc;
+        i=lc5.begin();
+        for(int o=0;o<2*now+1;o++)i++;
+        lc5.insert(i,'&');
+        addcom(lc1,num,now+1);
+        addcom(lc2,num,now+1);
+        addcom(lc3,num,now+1);
+        addcom(lc4,num,now+1);
+        addcom(lc5,num,now+1);
     }
     else
     {
-        /* code */
+        int x=0;
+        for (auto i=lc.rbegin();i!=lc.rend();i++)
+        {
+            if (*i>='0'&&*i<='9')
+            {
+                x+=x*10+(*i-'0');
+            }
+        }
+        if (x==complit(lc))
+            cout<<x<<endl;
     }
     
 }
 int main(){
-    for (int n=100;n<1000;n++)
+    int n=1998;
+    //for (int n=100;n<1000;n++)
     {
         list<char> lc;
         getnumlist(n,lc);
-        
+        addcom(lc,lc.size(),0);
     }
+    
 }
