@@ -9,7 +9,6 @@
 进入控制面板
 >选择 Network Services -> Samba Server
 
-!%#$%$#@@#$#@
 ## 使文件夹可以共享访问
 进入
 >/etc/samba/
