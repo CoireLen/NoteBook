@@ -29,3 +29,9 @@
 
 ### 启动 连接 一个镜像
 > start  attach
+
+### 加速镜像获取
+使用阿里云镜像加速服务
+>   sudo vim /etc/docker/daemon.json
+
+将"registry-mirrors": ["https://......com"] （对应自己的加速地址）复制到文件中

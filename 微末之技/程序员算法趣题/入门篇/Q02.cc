@@ -5,82 +5,67 @@
 例如:
     351:3*51=153
 */
+//使用递归
 #include <iostream>
-#include <list>
-using namespace std;
-void getnumlist(int a,list<char> &lc)
+int resave(int x,int length)
 {
-    while (a)
+    int y=0;
+    for(int i=0;i<length;i++)
     {
-        lc.push_front(a%10+'0');
-        a/=10;
+        y=y*10+x%10;
+        x/=10;
     }
+    return y;
 }
-int complit(list<char> &lc)
+void complet(int now,int *list,int step,int listlength,int x,int ad)
 {
-    for(auto i=lc.begin();i!=lc.end();i++)//&
+    if(step!=0)
     {
-        if(*i=='&')
-        {
-            lc.erase(i);
-            i=lc.begin();
-        }
-    }
-    return 0;
-}
-void addcom(list<char> &lc,int num,int now)
-{
-    if (now<num-1)
-    {
-        auto lc1(lc);
-        auto 
-        i=lc1.begin();
-        for(int o=0;o<2*now+1;o++)i++;
-        lc1.insert(i,'+');
-        auto lc2(lc);
-        i=lc2.begin();
-        for(int o=0;o<2*now+1;o++)i++;
-        lc2.insert(i,'-');
-        auto lc3=lc;
-        i=lc3.begin();
-        for(int o=0;o<2*now+1;o++)i++;
-        lc3.insert(i,'*');
-        auto lc4=lc;
-        i=lc4.begin();
-        for(int o=0;o<2*now+1;o++)i++;
-        lc4.insert(i,'/');
-        auto lc5=lc;
-        i=lc5.begin();
-        for(int o=0;o<2*now+1;o++)i++;
-        lc5.insert(i,'&');
-        addcom(lc1,num,now+1);
-        addcom(lc2,num,now+1);
-        addcom(lc3,num,now+1);
-        addcom(lc4,num,now+1);
-        addcom(lc5,num,now+1);
+        //  +
+        complet(step==listlength?list[0]:now+list[listlength-step],list,step-1,listlength,x,ad+1);
+        //  -
+        complet(step==listlength?list[0]:now-list[listlength-step],list,step-1,listlength,x,ad+1);
+        //  *
+        complet(step==listlength?list[0]:now*list[listlength-step],list,step-1,listlength,x,ad+1);
+        //  /
+        complet(step==listlength?list[0]:(now==0?1:now)/((list[listlength-step]==0)?1:list[listlength-step]),list,step-1,listlength,x,ad+1);
+        //  &
+        if (ad<(listlength-2))
+        complet(step==listlength?list[0]:now*10+list[listlength-step],list,step-1,listlength,x,ad+1);
     }
     else
     {
-        int x=0;
-        for (auto i=lc.rbegin();i!=lc.rend();i++)
-        {
-            if (*i>='0'&&*i<='9')
-            {
-                x+=x*10+(*i-'0');
-            }
-        }
-        if (x==complit(lc))
-            cout<<x<<endl;
+        if (now==resave(x,listlength))
+            printf("x:%d  = %d\n",now ,x);
     }
-    
 }
-int main(){
-    int n=1998;
-    //for (int n=100;n<1000;n++)
+int length(int x)
+{
+    int count=0;
+    while(x)
     {
-        list<char> lc;
-        getnumlist(n,lc);
-        addcom(lc,lc.size(),0);
+        count++;
+        x/=10;
     }
-    
+    return count;
+}
+int * split(int x)
+{
+    int l=length(x);
+    int *a=(int *)malloc(sizeof(int)*l);
+    for(int i=0;i<l;i++)
+    {
+        a[i]=x%10;
+        x/=10;
+    }
+    return a;
+}
+int main()
+{
+    for(int i=1000;i<10000;i++)
+    {
+        int * a=split(i);
+        complet(0,a,length(i),length(i),i,0);
+        free(a);
+    }
 }
