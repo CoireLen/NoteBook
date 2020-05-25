@@ -15,8 +15,14 @@
     # 
     PATH = $PATH:$HOME/.cargo/bin
     export PATH
-```
+    ###RUST源
+    export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
+使用代理
+```sh
+    export HTTP_PROXY=127.0.0.1:8888
+    export HTTPS_PROXY=127.0.0.1:8888
+```
 # 安装 nightly
 >    rustup update nightly
 
