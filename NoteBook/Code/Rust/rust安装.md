@@ -38,3 +38,13 @@ rustup component add rust-src --toolchain nightly
 ```rust
 -C prefer-dynamic
 ```
+
+# 设置使用tuna Crates源
+打开 ~/.cargo/config 添加以下内容
+```sh
+[source.crates-io]
+replace-with = 'tuna'
+
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+```
