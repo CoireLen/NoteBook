@@ -101,5 +101,31 @@ select distinct 类名 from 表名;
 select * from 表名 order by 类名;       # 默认升序
 select * from 表名 order by 类名 asc;   # 升序 
 select * from 表名 order by 类名 desc;  # 降序
+# 范围
+limit 开始的下标 , 数量;
+limit 数量 ;            
+# 函数
+select sum(类名) from 表名;     #求和
+select count(类名) from 表名;   #计数
+# 函数分组 
+select 函数(类名) from 表名 group by 类名;
+# 连接
+select 类1, 类2 from 表1 left join 表2 on 表1.类n = 表2.类n;
+# 左连接 会显示 左表有但是右表没有的 数据
+select 类1, 类2 from 表1 right join 表2 on 表1.类n = 表2.类n;
+# 右连接 参考上面 把左右互换
 
+# 子查询
+# // 关键词 in 、not in 、=、 != 、 exists 、 not exists 等
+select * from 表1 where 类1 in (select 类2 from 表2);
+
+# 交集
+# union all 包含重复
+# union  不包含重复
 ```
+## 权限
+```sql
+# 给予 并 建立用户
+grant select,insert on 表1.* to '用户'@'localhost' identified by '密码';
+# 收回
+revoke insert on 表1.* from '用户'@'localhost';
