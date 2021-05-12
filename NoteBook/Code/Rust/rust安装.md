@@ -20,8 +20,8 @@
 
 使用代理
 ```sh
-    export HTTP_PROXY=127.0.0.1:8888
-    export HTTPS_PROXY=127.0.0.1:8888
+    export HTTP_PROXY=127.0.0.1:8889
+    export HTTPS_PROXY=127.0.0.1:8889
 ```
 # 安装 nightly
 >    rustup update nightly
