@@ -31,4 +31,8 @@ ExecStart=/usr/sbin/redis-server /etc/redis/redis.conf
 ExecReload=/bin/kill -USR2 $MAINPID
 ExecStop=/bin/kill -SIGINT $MAINPID
 PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+Also=NetworkManager-wait-online.service
 ```
