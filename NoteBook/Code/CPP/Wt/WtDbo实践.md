@@ -241,3 +241,370 @@ select id, version, "name", "password", "role", "karma" from "user"
 ```
 
 ## 更新对象
+
+不像其他大多数智能指针，ptr `<Dbo>`默认是只读的：它返回一个 const Dbo*。要修改一个数据库对象，你需要调用 ptr::modify() 方法，它返回一个非常量对象。这标志着该对象是脏的，修改的内容随后将被同步到数据库中。
+
+```cpp
+dbo::ptr<User> joe = session.find<User>().where("name = ?").bind("Joe");
+
+joe.modify()->karma++;
+joe.modify()->password = "public";
+```
+
+数据库同步并不是即时发生的。相反，它们被延迟，直到使用ptr `<Dbo>`::flush()或Session::flush()明确要求，直到执行一个查询，其结果可能会受到所做更改的影响，或直到事务被提交。
+
+前面的代码将产生以下[SQL]()语句：
+
+```sql
+select "id", "version", "name", "password", "role", "karma"
+    from "user"
+    where (name = ?)
+update "user"
+    set "version" = ?, "name" = ?, "password" = ?, "role" = ?, "karma" = ?
+    where "id" = ? and "version" = ?
+```
+
+我们已经看到了如何使用Session::add(ptr `<Dbo>`)，我们将一个新的对象添加到数据库中。相反的操作是 ptr `<Dbo>`::remove(): 它删除了数据库中的对象。
+
+```cpp
+dbo::ptr<User> joe = session.find<User>().where("name = ?").bind("Joe");
+
+joe.remove();
+```
+
+在删除一个对象后，该暂存对象仍然可以使用，甚至可以重新添加到数据库中。
+
+> ![](./img-wtDbo/note.png)和modify()一样，add()和remove()操作也推迟了与数据库的同步，因此下面的代码实际上并没有对数据库产生任何影响。
+>
+> ```cpp
+> dbo::ptr<User> silly = session.add(std::unique_ptr<User>{new User()});
+> silly.modify()->name = "Silly";
+> silly.remove();
+> ```
+
+## 映射关系
+
+### 多对一关系
+
+让我们把帖子添加到我们的博客例子中，并在帖子和用户之间定义一个多对一的关系。在下面的代码中，我们把自己限制在对定义关系重要的语句上。
+
+```cpp
+#include <Wt/Dbo/Dbo.h>
+#include <string>
+
+namespace dbo = Wt::Dbo;
+
+class User;
+
+class Post {
+public:
+    ...
+
+    dbo::ptr<User> user;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::belongsTo(a, user, "user");
+    }
+};
+
+class User {
+public:
+    ...
+
+    dbo::collection< dbo::ptr<Post> > posts;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::hasMany(a, posts, dbo::ManyToOne, "user");
+    }
+};
+```
+
+在Many-side，我们添加了一个对用户的引用，并在persist()方法中调用 belongsTo()。这使得我们可以引用这个帖子所属的用户。最后一个参数将对应于定义关系的数据库列的名称。
+
+在单侧，我们添加一个帖子集合，并在persist()方法中调用hasMany()。连接字段必须与reciproce belongsTo()方法调用的名称相同。
+
+如果我们使用Session::mapClass()将Post类添加到我们的会话中，并创建模式，会产生以下SQL：
+
+```sql
+create table "user" (
+    ...
+
+    -- table user is unaffected by the relationship
+);
+
+create table "post" (
+    ...
+
+    "user_id" bigint,
+    constraint "fk_post_user" foreign key ("user_id") references "user" ("id") deferrable initially deferred
+)
+```
+
+注意与连接名称 "user "相对应的user_id字段。
+
+在Many-side，你可以读取或写入ptr来设置这个帖子所属的用户。
+
+一方的集合允许我们检索所有相关的元素，也可以insert()和remove()元素，这与在多方设置ptr的效果相同。
+
+**范例：**
+
+```cpp
+dbo::ptr<Post> post = session.add(std::unique_ptr<Post>{new Post()});
+post.modify()->user = joe; // or joe.modify()->posts.insert(post);
+
+// will print 'Joe has 1 post(s).'
+std::cerr << "Joe has " << joe->posts.size() << " post(s)." << std::endl;
+```
+
+正如你所看到的，只要joe被设置为新帖子的用户，该帖子就会反映在joe的帖子集合中，反之亦然。
+
+### 多对多关系
+
+为了说明多对多的关系，我们将在我们的博客例子中添加标签，并在帖子和标签之间定义一个多对多的关系。在下面的代码中，我们再次将自己限制在对定义关系重要的语句上。
+
+```cpp
+#include <Wt/Dbo/Dbo.h>
+#include <string>
+
+namespace dbo = Wt::Dbo;
+
+class Tag;
+
+class Post {
+public:
+    ...
+
+    dbo::collection< dbo::ptr<Tag> > tags;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::hasMany(a, tags, dbo::ManyToMany, "post_tags");
+    }
+};
+
+class Tag {
+public:
+    ...
+
+    dbo::collection< dbo::ptr<Post> > posts;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::hasMany(a, posts, dbo::ManyToMany, "post_tags");
+    }
+};
+```
+
+正如预期的那样，这种关系以几乎相同的方式反映在两个类中：它们都有一个相关类的数据库对象集合，在 persist() 方法中，我们调用 hasMany() 。在这种情况下，连接字段将对应于用于持久化关系的连接表的名称。
+
+使用Session::mapClass()将Post类添加到我们的会话中，我们现在得到以下用于创建模式的SQL。
+
+```sql
+create table "post" (
+    ...
+
+    -- table post is unaffected by the relationship
+)
+
+create table "tag" (
+    ...
+
+    -- table tag is unaffected by the relationship
+)
+
+create table "post_tags" (
+    "post_id" bigint not null,
+    "tag_id" bigint not null,
+    primary key ("post_id", "tag_id"),
+    constraint "fk_post_tags_key1" foreign key ("post_id")
+        references "post" ("id") on delete cascade deferrable initially deferred,
+    constraint "fk_post_tags_key2" foreign key ("tag_id")
+        references "tag" ("id") on delete cascade deferrable initially deferred
+)
+
+create index "post_tags_post" on "post_tags" ("post_id")
+create index "post_tags_tag" on "post_tags" ("tag_id")
+```
+
+多对多关系两边的集合允许我们检索所有相关的元素。要定义一个帖子和一个标签之间的关系，你需要把帖子添加到标签的帖子集合，或者把标签添加到帖子的标签集合。你不可能同时做这两件事! 这一变化将自动反映在相互的集合中。同样地，要撤销一个帖子和一个标签之间的关系，你应该从帖子的标签集合中删除标签，或者从标签的帖子集合中删除帖子，但不能同时进行。
+
+**范例:**
+
+```cpp
+dbo::ptr<Post> post = ...
+dbo::ptr<Tag> cooking = session.add(std::unique_ptr<Tag>{new Tag()});
+cooking.modify()->name = "Cooking";
+
+post.modify()->tags.insert(cooking);
+
+// will print '1 post(s) tagged with Cooking.'
+std::cerr << cooking->posts.size() << " post(s) tagged with Cooking."
+          << std::endl;
+```
+
+![](./img-wtDbo/warning.png)与上述相同的警告也适用于此。
+
+### 一对一关系
+
+让我们为我们的博客实例添加一个设置类，并在设置和用户之间定义一个一对一的关系。在下面的代码中，我们把自己限制在对定义关系重要的语句上。
+
+```cpp
+#include <Wt/Dbo/Dbo.h>
+#include <string>
+
+namespace dbo = Wt::Dbo;
+
+class User;
+
+class Settings {
+public:
+    ...
+
+    dbo::ptr<User> user;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::belongsTo(a, user);
+    }
+};
+
+class User {
+public:
+    ...
+
+    dbo::weak_ptr<Settings> settings;
+
+    template<class Action>
+    void persist(Action& a)
+    {
+        ...
+
+        dbo::hasOne(a, settings);
+    }
+};
+```
+
+尽管一对一的关系听起来是对称的，但它在数据库和Wt::Dbo中的实现却不是。在数据库中，这种关系是由一个表到另一个表的外键定义的（在我们的例子中，从设置到用户）。我们将通过说明一方是拥有的，另一方是拥有的来区分双方。
+
+在拥有方，我们添加一个对用户的引用，并在persist()方法中调用 belongsTo()。这使得我们可以引用这些设置所属的用户。
+
+在拥有方，我们为其设置添加一个弱引用，并在persist()方法中调用hasOne()。
+
+如果我们使用Session::mapClass()将设置类添加到我们的会话中，并创建模式，就会产生以下SQL。
+
+```sql
+create table "user" (
+    ...
+
+    -- table user is unaffected by the relationship
+);
+
+create table "settings" (
+    ...
+
+    "user_id" bigint,
+    constraint "fk_settings_user" foreign key ("user_id") references "user" ("id") deferrable initially deferred
+)
+```
+
+在拥有方，我们使用 weak_ptr 来避免创建一个循环。weak_ptr实际上并不存储引用（也不存储底层数据库记录），而是以数据库查询的方式定义。这样做的结果是对它的任何操作都会涉及到查询。
+
+在任何一方，你可以改变数值，这将更新关系的对等方。
+
+**范例:**
+
+```cpp
+dbo::ptr<User> joe = session.find<User>().where("name = ?").bind("Joe");
+
+dbo::ptr<Settings> settings = session.add(std::unique_ptr<Settings>{new Settings()});
+settings.modify()->theme = "fancy-pink";
+joe.modify()->settings = settings;
+
+// will print 'Settings apply to Joe'
+std::cerr << "Settings apply to " << settings->user->name << std::endl;
+```
+
+正如你所看到的，只要关系的一侧被修改，这也会反映在另一侧。
+
+## 自定义映射
+
+默认情况下，Wt::Dbo将为每个映射的表添加一个自动递增的代理主键（id）和一个版本字段（version）。
+
+虽然这些默认值对一个新项目是有意义的，但你可以定制映射，这样你就可以映射到几乎任何现有的数据库模式。
+
+### 更改或禁用代理主键“id”字段
+
+要改变用于映射类的代理主键的字段名，或者禁用一个类的代理主键而使用自然键，你需要对Wt::Dbo::dbo_traits `<C>`进行专业化。
+
+例如，下面的代码将类Post的主键字段从id改为post_id。
+
+```cpp
+#include <Wt/Dbo/Dbo.h>
+
+namespace dbo = Wt::Dbo;
+
+class Post {
+public:
+  ...
+};
+
+namespace Wt {
+    namespace Dbo {
+
+        template<>
+        struct dbo_traits<Post> : public dbo_default_traits {
+            static const char *surrogateIdField() {
+                return "post_id";
+            }
+        };
+
+    }
+}
+```
+
+### 更改或禁用“版本”字段
+
+要改变用于乐观的并发控制版本字段（version）的字段名，或者为一个类全部禁用乐观的并发控制，你需要将Wt::Dbo::dbo_traits `<C>`专业化。
+
+例如，下面的代码禁用了Post类的乐观并发控制。
+
+```cpp
+#include <Wt/Dbo/Dbo.h>
+
+namespace dbo = Wt::Dbo;
+
+class Post {
+public:
+    ...
+};
+
+namespace Wt {
+    namespace Dbo {
+
+        template<>
+        struct dbo_traits<Post> : public dbo_default_traits {
+            static const char *versionField() {
+                return 0;
+            }
+        };
+
+    }
+}
+```
