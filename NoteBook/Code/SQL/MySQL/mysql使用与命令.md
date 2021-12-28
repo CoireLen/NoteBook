@@ -33,7 +33,14 @@ show databases;
 2 rows in set (0.001 sec)
 ```
 
+#### 进入数据库
+
+```mysql
+use <datebase_name>
+```
+
 #### 使用命令显示数据库中的表
+
 ```sql
 show tables;
 ```
@@ -42,7 +49,7 @@ show tables;
 drop database 数据库名字;
 drop table 表名;
 ```
-#### 显示内容
+#### 显示表的数据结构
 ```sql
 desc 表名;
 ```
@@ -129,3 +136,6 @@ select * from 表1 where 类1 in (select 类2 from 表2);
 grant select,insert on 表1.* to '用户'@'localhost' identified by '密码';
 # 收回
 revoke insert on 表1.* from '用户'@'localhost';
+
+```
+
