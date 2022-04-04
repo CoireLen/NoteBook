@@ -20,7 +20,7 @@
 ### Images
 >docker images
 
-获取现有镜像信息
+获取建立新的镜像 
 ### commit 
 > docker commit -m "消息" -a "作者" id username/imgname:ver
 

@@ -7,16 +7,24 @@
 hiredis
 
 # 服务
+
 ## 启动后台模式
+
 将\etc\redis\default.conf.example
 复制一份到./redis.conf
 修改
+
 ```sh
 #daemonize no
 daemonize yes
 ```
+
 记住 pidfile /run/redis/default.pid 的路径
+
 ## service
+
+建立 /etc/systemd/system
+
 ```sh
 [Unit]
 Description=Redis Server Manager
