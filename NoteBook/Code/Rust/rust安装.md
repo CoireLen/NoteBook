@@ -1,17 +1,22 @@
-# 打开https://rustup.rs/
+# 使用zypper安装
+```sh
+sudo zypper in cargo rustup
+```
+# 使用官方链接安装
+## 打开https://rustup.rs/
 
 获取最新的安装命令
 
 > curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# 设置 PATH
+## 设置 PATH
 
 1. 系统路径
    /etc/profile
 2. 用户路径
    $HOME/.bashrc
 
-## 在文件末尾添加
+### 在文件末尾添加
 
 ```sh
     #
