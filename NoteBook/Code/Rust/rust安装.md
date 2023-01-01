@@ -26,6 +26,11 @@ sudo zypper in cargo rustup
     export PATH
     ###RUST源
     export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+```
+要立即生效只需要source一下.bashrc文件,之后无需再source 
+```sh
+source .bashrc
+```
 
 使用代理
 ```sh
