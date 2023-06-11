@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "354e09b6f984c358",
+    "type": "split",
+    "children": [
+      {
+        "id": "bcebf17110f1fe6d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "37f2366e389cd389",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8d92df81dcf3cb35",
+    "type": "split",
+    "children": [
+      {
+        "id": "e1dc1bad6159dbb0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bac843c03a0b8fad",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "523c21cf5906160f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "68a3578b4aa4a35f",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b7580a66e9311ef9",
+    "type": "split",
+    "children": [
+      {
+        "id": "8f74f00bac03e627",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0e07b08026307dd3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "cd5aab7ddbacf210",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1751af85d39e7fa8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "e4b331702dce544a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "bac843c03a0b8fad",
+  "lastOpenFiles": [
+    "未命名.canvas",
+    "NoteBook/Code/Rust/cli命令行/indicatif进度条.md",
+    "NoteBook/Code/Rust/库.md",
+    "NoteBook/Code/Rust/std标准库/数据类型.md",
+    "NoteBook/Code/Rust/std标准库/格式化输出.md",
+    "NoteBook/Code/Rust/cargo源.md",
+    "NoteBook/Code/Rust/rust安装.md",
+    "NoteBook/Code/Rust/生成支持.md",
+    "NoteBook/Code/Rust/rust基本操作.md",
+    "NoteBook/Code/Rust/cli命令行/dialoguer交互.md",
+    "NoteBook/Code/Python/Scipy/数学函数.md",
+    "NoteBook/Code/Python/Scipy/常数.md",
+    "NoteBook/Code/Python/Numpy/数据的存储.md",
+    "NoteBook/Code/Python/matplotlib/基本设定.md",
+    "NoteBook/Code/Python/读取文件/csv.md",
+    "NoteBook/Code/Latex/默认文档配置.md",
+    "NoteBook/Code/CPP/vcpkg.md",
+    "NoteBook/Code/CPP/cuda安装配置.md",
+    "NoteBook/Code/CPP/现代c++编程要点.md",
+    "NoteBook/Linux/系统/多版本应用管理.md",
+    "NoteBook/Linux/Nvidia/cudatool.md",
+    "NoteBook/Linux/Nvidia",
+    "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo/main.cpp",
+    "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo/CMakeLists.txt",
+    "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo",
+    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/main.cpp",
+    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/conanfile.txt",
+    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/conan.md",
+    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/CMakeLists.txt",
+    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan"
+  ]
+}

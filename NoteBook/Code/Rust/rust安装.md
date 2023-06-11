@@ -57,7 +57,7 @@ rustup component add rust-src --toolchain nightly
 ```
 
 # 设置使用tuna Crates源
-
+[[cargo源]]
 打开 ~/.cargo/config 添加以下内容
 
 ```sh
