@@ -11,8 +11,13 @@
             "id": "37f2366e389cd389",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "NoteBook/Code/Rust/SQLite基本操作.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
             }
           }
         ]
@@ -60,6 +65,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "cad2a34f33836649",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -81,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "NoteBook/Code/Rust/SQLite基本操作.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "NoteBook/Code/Rust/SQLite基本操作.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +133,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "NoteBook/Code/Rust/SQLite基本操作.md"
+              }
             }
           }
         ]
@@ -137,8 +154,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "bac843c03a0b8fad",
+  "active": "37f2366e389cd389",
   "lastOpenFiles": [
+    "NoteBook/Code/CPP/现代c++编程要点.md",
+    "NoteBook/Code/Rust/SQLite基本操作.md",
+    "NoteBook/Code/CPP/vcpkg.md",
+    "NoteBook/Code/CPP/cuda安装配置.md",
     "未命名.canvas",
     "NoteBook/Code/Rust/cli命令行/indicatif进度条.md",
     "NoteBook/Code/Rust/库.md",
@@ -155,9 +176,6 @@
     "NoteBook/Code/Python/matplotlib/基本设定.md",
     "NoteBook/Code/Python/读取文件/csv.md",
     "NoteBook/Code/Latex/默认文档配置.md",
-    "NoteBook/Code/CPP/vcpkg.md",
-    "NoteBook/Code/CPP/cuda安装配置.md",
-    "NoteBook/Code/CPP/现代c++编程要点.md",
     "NoteBook/Linux/系统/多版本应用管理.md",
     "NoteBook/Linux/Nvidia/cudatool.md",
     "NoteBook/Linux/Nvidia",

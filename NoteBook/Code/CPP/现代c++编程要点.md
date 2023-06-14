@@ -33,7 +33,98 @@
     auto a{1};
 ```
 ## Class 类
-### 基类继承派生
-### 友元
+```cpp
+export class SomeClass{
+	void fn();//默认是私有
+	public:
+		//公有的
+	private:
+		//私有的
+}
+export struct somestruct{
+	//默认公有
+	private:
+	//私有
+}
+```
+#### 显式设置构造函数
+```cpp
+class MyClass{
+	double m_value,
+	double m_foo,
+	MyClass(const MyClass& src)=default; //设置为默认拷贝函数
+	MyClass(const MyClass& src)=delete; //设置不允许拷贝该类
+}
+MyClass::MyClass(double val):m_value{val},m_foo{val}
+{
+	
+}
+```
+#### 初始化列表构造函数
+```cpp
+class Mclass{
+	public:
+	Mclass(initializer_list<T> args){
+	for (const auto & val:args){
+		//do_something
+		}
+	}
+}
+Mclass a{1,2,3,4,5,6,7,8}
+```
+使用initializer_list<>
+#### 委托构造
+```cpp
+class Mclass{
+	Mclass(t):OtherClass{t}{}
+}
+```
+#### explicit 禁用隐式转换
+```cpp
+class MClass{
+	explicit Mclass(String_View a){};
+}
+//MClass{"asd"sv};
+//将无法通过编译
+```
+#### 赋值函数
+```cpp
+class Mclass{
+	public:
+		Mclass& operator=(const Mclass& rhs){
+		//do Something;
+		}
+}
+```
+关于[[现代c++编程要点#显式设置构造函数]]
 
+### 友元
+```cpp
+class Mclass{
+	friend class OtherClass;//类
+	friend void OtherClass::fn();//类函数
+	friend void fn(); //函数
+}
+```
+定义友元后 private 的数据将会被暴露给指定的类/函数
+#### noexcept 永不抛出异常
+```cpp
+class Mclass{
+	public:
+	void swap(Mclass& first,Mclass& second) noexcept; //如果该函数出现异常将终止程序
+}
+```
+#### 右值引用
+右值一般为临时值
+```cpp
+int a{1},b{2};
+int&& c{a+b};
+void fn(int && val){};
+fn(std::move(a));
+fn(a+b);
+//直接调用fn(a)因为其是左值所以会失败
+```
+使用右值引用时，会将拷贝数据的操作优化为移动数据，将提升性能
+
+### 继承
 ## 单元测试
