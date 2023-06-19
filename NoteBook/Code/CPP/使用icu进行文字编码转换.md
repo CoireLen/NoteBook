@@ -15,6 +15,7 @@ int main(int, char**) {
     std::cout <<u8"utf8 error"<<std::endl;
     }
     char* u8str=u8"(123abc你是不是大师?贾大师_ !)    ";
+    //在使用msvc时出现字符串包含换行 需要将代码重新保存为UTF-8 With BOM
     UChar str[100];
     char out[100];
     ucnv_toUChars(conv_utf8,str,100,u8str,50,&ecode);
