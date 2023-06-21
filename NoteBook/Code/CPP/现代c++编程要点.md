@@ -160,6 +160,30 @@ class Baseclass{
 }
 ```
 如此这般，在派生类中重写函数将会报错；
+#### 纯虚方法和抽象基类
+```cpp
+class BaseClass{
+    public:
+        virtual ~BaseClass() =default;
+        virtual void set(int num) =0;
+        virtual std::string getString() const=0;
+        //使用=0来定义纯虚方法
+};
+class OtherClass:public BaseClass{
+    private:
+        int val=0;
+    public:
+        ~OtherClass()=default;
+        void set(int num) override{val=num;};
+        std::string getString() const override{return std::to_string(val);};
+};
+int main()
+{
+    std::unique_ptr<BaseClass> c {new OtherClass{}};
+    c->set(10);
+    cout<<c->getString()<<endl;
+}
+```
 #### 多态
 
 #### 多重继承
