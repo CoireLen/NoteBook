@@ -184,9 +184,10 @@ int main()
     cout<<c->getString()<<endl;
 }
 ```
-#### 多态
-
 #### 多重继承
+```cpp
+class myclass:public class1,public class2{
 
-
+}
+```
 ## 单元测试

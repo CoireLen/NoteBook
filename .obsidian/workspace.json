@@ -4,18 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "bcebf17110f1fe6d",
+        "id": "b0ba369904ab5868",
         "type": "tabs",
         "children": [
           {
-            "id": "37f2366e389cd389",
+            "id": "3fcef0611902dfa6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NoteBook/Code/CPP/SQLitecpp 基本操作.md",
+                "file": "NoteBook/Code/CPP/现代c++编程要点.md",
                 "mode": "source",
-                "backlinks": true,
                 "source": false
               }
             }
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NoteBook/Code/CPP/SQLitecpp 基本操作.md",
+                "file": "NoteBook/Code/CPP/现代c++编程要点.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NoteBook/Code/CPP/SQLitecpp 基本操作.md",
+                "file": "NoteBook/Code/CPP/现代c++编程要点.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,16 +133,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NoteBook/Code/CPP/SQLitecpp 基本操作.md"
+                "file": "NoteBook/Code/CPP/现代c++编程要点.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -154,14 +153,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "37f2366e389cd389",
+  "active": "3fcef0611902dfa6",
   "lastOpenFiles": [
-    "NoteBook/Code/Rust/SQLite基本操作.md",
-    "NoteBook/Code/CPP/SQLitecpp 基本操作.md",
+    "NoteBook/Code/Rust/Tauri 技术要点.md",
+    "NoteBook/Code/Rust/Cargo 使用要点.md",
+    "未命名.canvas",
+    "NoteBook/Code/Rust/rust 编程要点.md",
     "NoteBook/Code/CPP/现代c++编程要点.md",
+    "NoteBook/Code/CPP/使用opencc进行繁简转换.md",
+    "NoteBook/Code/CPP/使用icu进行文字编码转换.md",
+    "NoteBook/Code/CPP/使用boost进行文字编码转换.md",
+    "NoteBook/Code/CPP/SQLitecpp 基本操作.md",
+    "未命名.md",
+    "NoteBook/Code/Rust/SQLite基本操作.md",
     "NoteBook/Code/CPP/vcpkg.md",
     "NoteBook/Code/CPP/cuda安装配置.md",
-    "未命名.canvas",
     "NoteBook/Code/Rust/cli命令行/indicatif进度条.md",
     "NoteBook/Code/Rust/库.md",
     "NoteBook/Code/Rust/std标准库/数据类型.md",
@@ -169,7 +175,6 @@
     "NoteBook/Code/Rust/cargo源.md",
     "NoteBook/Code/Rust/rust安装.md",
     "NoteBook/Code/Rust/生成支持.md",
-    "NoteBook/Code/Rust/rust基本操作.md",
     "NoteBook/Code/Rust/cli命令行/dialoguer交互.md",
     "NoteBook/Code/Python/Scipy/数学函数.md",
     "NoteBook/Code/Python/Scipy/常数.md",
@@ -177,15 +182,12 @@
     "NoteBook/Code/Python/matplotlib/基本设定.md",
     "NoteBook/Code/Python/读取文件/csv.md",
     "NoteBook/Code/Latex/默认文档配置.md",
-    "NoteBook/Linux/系统/多版本应用管理.md",
-    "NoteBook/Linux/Nvidia/cudatool.md",
     "NoteBook/Linux/Nvidia",
     "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo/main.cpp",
     "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo/CMakeLists.txt",
     "NoteBook/Code/CPP/Cmake/CppUseQtForCmakeDemo",
     "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/main.cpp",
     "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/conanfile.txt",
-    "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/conan.md",
     "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan/CMakeLists.txt",
     "NoteBook/Code/CPP/Cmake/CppUseImguiForCmakeAndConan"
   ]
