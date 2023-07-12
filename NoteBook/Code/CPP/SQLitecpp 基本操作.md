@@ -1,3 +1,8 @@
+```cmake
+  find_package(SQLiteCpp CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE SQLiteCpp)
+
+```
 ```cpp
 #include <iostream>
 #include <SQLiteCpp/SQLiteCpp.h>

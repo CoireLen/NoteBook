@@ -22,5 +22,3 @@ registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"
 [source.rustcc]
 registry = "git://crates.rustcc.cn/crates.io-index"
 
-[target.x86_64-pc-windows-msvc]
-rustflags = ["-C", "target-feature=+crt-static"]
