@@ -1,3 +1,5 @@
+## 初始化设置
+#GTK #GUI #编译环境
 在Windows系统下使用gtk4
 
 1.安装package-confg工具，并将bin目录加入PATH

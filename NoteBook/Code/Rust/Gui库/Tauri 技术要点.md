@@ -1,3 +1,4 @@
+#GUI #WEB 
 ### 跳过 src-tauri 中的文件变更自动重新编译
 在该目录下建立.taurigonre
 ```
