@@ -35,3 +35,8 @@ add_executable(Dir_name 你的文件.cc)
 link_libraries(lib_name)
 link_libraries("/path/libname.so")
 ```
+## 设置CPP版本
+### 设置单个项目的CPP版本
+```cmake
+set_property(TARGET tgt PROPERTY CXX_STANDARD 11)
+```
