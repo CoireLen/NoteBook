@@ -3,7 +3,13 @@
 
 在里面的EXECStart的后面增加后如下:
 
-> ExecStart=/usr/bin/dockerd - -graph /home/docker
+```sh
+ExecStart=/usr/bin/dockerd --data-root /home/docker
+# --graph /home/docker # 已废弃
+```
+
+
+
 
 重启
 
